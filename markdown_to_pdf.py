@@ -1,7 +1,7 @@
 import os
 import re
 import subprocess
-#node.js plantuml(javaで代用可) md-to-pdfが必要。
+#node.js plantuml(javaで代用可) md-to-pdfが必要。(npm install -g md-to-pdf)
 
 def extract_plantuml_code_from_markdown(input_markdown_path):
     # Markdownファイル読み込み
@@ -51,6 +51,8 @@ def save_markdown_to_file(markdown_content, output_md_path):
 
 def convert_md_to_pdf(input_md_path,):
     try:
+        #md_to_pdf_path = os.path.join(os.environ['APPDATA'], 'npm', 'md-to-pdf.cmd')
+        #subprocess.run([md_to_pdf_path, input_md_path], check=True)
         subprocess.run(["md-to-pdf", input_md_path], check=True)
         print("Conversion successful!")
     except subprocess.CalledProcessError as e:
@@ -62,8 +64,6 @@ input_markdown_path = input()  # ユーザーからの入力を受け取る
 #print("output file(.md)")
 #output_md_path = input()
 output_md_path = "output.md"
-#/Users/nishikawashota/Downloads/Markdown/out.md
-
 
 plantuml_matches = extract_plantuml_code_from_markdown(input_markdown_path)
 image_paths = generate_diagram_images(plantuml_matches)
