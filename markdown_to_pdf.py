@@ -1,7 +1,7 @@
 import os
 import re
 import subprocess
-#node.js plantuml md-to-pdfが必要。
+#node.js plantuml(javaで代用可) md-to-pdfが必要。
 
 def extract_plantuml_code_from_markdown(input_markdown_path):
     # Markdownファイル読み込み
@@ -22,8 +22,9 @@ def generate_diagram_images(plantuml_matches):
         with open(f"images/diagram_{i}.puml", "w", encoding="utf-8") as file:
             file.write(plantuml_code)
 
-       #subprocess.run(["plantuml", f"-tpng", f"diagram_{i}.puml"])
-        subprocess.run(["plantuml", f"-tsvg", f"images/diagram_{i}.puml"])
+        #subprocess.run(["plantuml", f"-tpng", f"diagram_{i}.puml"]) #macOS
+        subprocess.run(["plantuml", f"-tsvg", f"images/diagram_{i}.puml"]) #macOS
+        #subprocess.run(["java","-Dfile.encoding=UTF-8", "-jar", "plantuml.jar","-tsvg", f"images/diagram_{i}.puml"]) #windowsOS
 
         #image_paths.append(f"diagram_{i}.png")
         image_paths.append(f"images/diagram_{i}.svg")
